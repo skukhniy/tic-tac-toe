@@ -1,0 +1,27 @@
+html{
+    height:100%;
+}
+body {
+    background-color: gray;
+    margin:0;
+    min-height:100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+#gameboard{
+    background-color: burlywood;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    height:606px;
+    width:606px;
+    margin: 0 auto;
+}
+.block{
+    height: 200px;
+    width:200px;
+    background-color: purple;
+    border: 1px solid black;
+}
