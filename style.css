@@ -27,3 +27,6 @@ body {
     font-size:  150px;
     text-align: center;
 }
+.box:hover{
+    background-color: rgb(146, 3, 146);
+}

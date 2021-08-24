@@ -3,9 +3,10 @@
 // function to display the current array
 // logic to see if you won the game/draw/loss
 // register whos X and whose O
+// ['x','x','x','x','x','x','x','x','x']
 
 const gameBoard = (()=>{
-    const boardArray = ['x','x','x','x','x','x','x','x','x']
+    const boardArray = ['','','','','','','','','']
 
 
     return{boardArray}
@@ -24,5 +25,27 @@ const displayController = (()=>{
 })();
 
 const Player = () =>{
+    
+    
+
 
 };
+
+const game = (() => {
+    let lastX = false
+
+
+
+    
+    // NEED TO FIX 
+    Object.keys(displayController.boxSelectors).forEach((selector,index)=>{
+        selector.addEventListener('click',() =>{
+            if(lastX === False){
+                gameBoard.boardArray[index] = 'X'
+            }else{
+                gameBoard.boardArray[index] = 'O'
+            }
+            displayController.render
+        });
+    })
+})();
