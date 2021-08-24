@@ -19,9 +19,11 @@ body {
     width:606px;
     margin: 0 auto;
 }
-.block{
+.box{
     height: 200px;
     width:200px;
     background-color: purple;
     border: 1px solid black;
+    font-size:  150px;
+    text-align: center;
 }
