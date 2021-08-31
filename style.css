@@ -9,6 +9,11 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+#header h1{
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
 #gameboard{
     background-color: burlywood;
     display: flex;
@@ -29,4 +34,11 @@ body {
 }
 .box:hover{
     background-color: rgb(146, 3, 146);
+}
+
+#headerButtons{
+    margin-bottom: 10px;
+}
+#reset{
+    margin-top: 5px;
 }
