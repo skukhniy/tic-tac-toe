@@ -40,12 +40,14 @@ const gameBoard = (()=>{
 const displayController = (()=>{
     const boxSelectors = document.getElementsByClassName("box")
 
+    const resetSelector = document.getElementById("reset")
+
     const render = () => (gameBoard.boardArray.forEach((move,index)=>{
             // console.log(gameBoard.boardArray)
             boxSelectors[index].innerHTML = move
         }));
     
-    return{boxSelectors,render}
+    return{boxSelectors,resetSelector,render}
 
 })();
 
@@ -90,5 +92,9 @@ const game = (() => {
         });
     })
 
+    displayController.resetSelector.addEventListener('click',()=>{
+        gameBoard.boardArray = ['','','','','','','','','']
+        displayController.render()
+    })
 
 })();
