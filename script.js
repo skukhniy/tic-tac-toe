@@ -42,13 +42,33 @@ const displayController = (()=>{
 
     const resetSelector = document.getElementById("reset")
 
+    const vsCPU = document.getElementById("CPU")
+    const vsPlayer = document.getElementById("player2")
+
     const render = () => (gameBoard.boardArray.forEach((move,index)=>{
             // console.log(gameBoard.boardArray)
             boxSelectors[index].innerHTML = move
         }));
     
-    return{boxSelectors,resetSelector,render}
+    return{boxSelectors,resetSelector,vsCPU,vsPlayer,render}
 
+})();
+
+const CPU =(()=>{
+// set up functions that'll grab random moves
+//later on get functions that will always pick the optimal move.
+    let openMoves = []
+    const cpuMoveType = ()=>{return('O')}
+    const cpuMove = ()=>{
+        gameBoard.boardArray.forEach((box,index)=>{
+            if(box === ''){
+                openMoves.push(index)
+            }
+        })
+        let move = openMoves[Math.floor(Math.random() * openMoves.length)]
+        return(move)
+    }
+    return{cpuMove,cpuMoveType}
 })();
 
 const game = (() => {
@@ -69,22 +89,40 @@ const game = (() => {
             }
         }
     }
-
+    let cpuCheck = true
+    let playerCheck = false
+    displayController.vsCPU.addEventListener('click',()=>{
+        if (gameBoard.boardArray === ['','','','','','','','','']){
+            cpuCheck = true
+            playerCheck = false
+            }
+    });
+    displayController.vsPlayer.addEventListener('click',()=>{
+        if (gameBoard.boardArray === ['','','','','','','','','']){
+        cpuCheck = false
+        playerCheck = true
+        }
+    });
     Object.keys(displayController.boxSelectors).forEach((index)=>{
         displayController.boxSelectors[index].addEventListener('click',() =>{
             if(gameBoard.player1.getTurn() === true && gameBoard.boardArray[index] == ''){
                 gameBoard.boardArray[index] = gameBoard.player1.getMoveType()
                 //console.log("player 1 turn")
-                gameBoard.player1.nextTurn()
-                gameBoard.player2.nextTurn()
-            }else if(gameBoard.player2.getTurn() === true && gameBoard.boardArray[index] == ''){
-                gameBoard.boardArray[index] = gameBoard.player2.getMoveType()
-                //console.log("player 2 turn")
-                gameBoard.player1.nextTurn()
-                gameBoard.player2.nextTurn()
+                if(playerCheck === true){
+                    gameBoard.player1.nextTurn()
+                    gameBoard.player2.nextTurn()
+                }
+            }else if(gameBoard.player2.getTurn() === true && playerCheck === true && gameBoard.boardArray[index] == ''){
+                    gameBoard.boardArray[index] = gameBoard.player2.getMoveType()
+                    gameBoard.player2.nextTurn()
+                    gameBoard.player1.nextTurn()
+                    console.log('PLAYER 1 TURNED')
             }else{
                 console.log(gameBoard.player1.getTurn())
                 console.log(gameBoard.player2.getTurn())
+            }
+            if(cpuCheck === true){
+                gameBoard.boardArray[CPU.cpuMove()] = CPU.cpuMoveType()
             }
             displayController.render()
             checkWinner()
